@@ -48,7 +48,8 @@ class ScriptScreen(customtkinter.CTkFrame):
         self.script_text_input = customtkinter.CTkTextbox(self.bottom_frame,font=font.md,width=250,padx=20, pady=20)
         self.script_text_input.grid(row=0, column=0, sticky="nsew", padx=20, pady=20)
 
-        self.next_button = customtkinter.CTkButton(self.bottom_frame, text="Next", font=font.md, command=self.bottom_frame)
+        # self.next_button = customtkinter.CTkButton(self.bottom_frame, text="Next", font=font.md, command=self.bottom_frame)
+        self.next_button = customtkinter.CTkButton(self.bottom_frame, text="Next", font=font.md, command=self.navigate_to_third_screen)
         self.next_button.grid(row=1, column=0, padx=20, pady=20,sticky="se")
         self.next_button.configure(height=50, width=250)
         
@@ -57,7 +58,6 @@ class ScriptScreen(customtkinter.CTkFrame):
         self.bottom_frame.grid_rowconfigure(0, weight=1)
         self.bottom_frame.grid_columnconfigure(0, weight=1)
         
-
       
     def open_file(self):
         path = filedialog.askopenfilename(filetypes=(('text files', '*.txt'), ('All files', '*.*') ))
@@ -72,4 +72,8 @@ class ScriptScreen(customtkinter.CTkFrame):
             self.script_text_input.delete("1.0", "end")
             self.script_text_input.insert("0.0",content)
 
+
+    def navigate_to_third_screen(self):
+        # Call the navigate_to_third_screen method of the App class
+        self.master.navigate_to_third_screen()
 
