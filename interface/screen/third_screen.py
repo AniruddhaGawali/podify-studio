@@ -8,9 +8,10 @@ class Third_screen(customtkinter.CTkFrame):
     def __init__(self, master: customtkinter.CTk, font: font.FontSize):
         super().__init__(master)
 
+        #! this was the problem for alignment try to change value to get result as you want
         # Configure grid weights
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_columnconfigure(0, weight=1)
+        # self.grid_rowconfigure(0, weight=1)
+        # self.grid_columnconfigure(0, weight=1)
 
         # Dropdown menu for selecting audio
         self.select_audio_label = customtkinter.CTkLabel(self, text="Select Audio", font=font.md)
@@ -27,10 +28,10 @@ class Third_screen(customtkinter.CTkFrame):
         self.person1_label.grid(row=2, column=0, pady=5, padx=10, sticky="w")
 
         self.person2_label = customtkinter.CTkLabel(self, text="Person 2:", font=font.md)
-        self.person2_label.grid(row=6, column=0, pady=5, padx=10, sticky="w")
+        self.person2_label.grid(row=4, column=0, pady=5, padx=10, sticky="w")
 
         self.person3_label = customtkinter.CTkLabel(self, text="Person 3:", font=font.md)
-        self.person3_label.grid(row=10, column=0, pady=5, padx=10, sticky="w")
+        self.person3_label.grid(row=5, column=0, pady=5, padx=10, sticky="w")
 
         # Input label 
         self.person1_input = customtkinter.CTkLabel(self, text="", font=font.md)
