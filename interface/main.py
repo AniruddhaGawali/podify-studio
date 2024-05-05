@@ -1,7 +1,7 @@
 import tkinter as tk
 import customtkinter
 from style import font
-from screen import startup_screen, script_screen ,third_screen # Importing the screens
+from screen import startup_screen, script_screen ,third_screen , last_screen # Importing the screens
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -19,6 +19,7 @@ class App(customtkinter.CTk):
         self.startup_screen = startup_screen.StartupScreeen(self, self.font)
         self.script_screen = script_screen.ScriptScreen(self, self.font)
         self.third_screen = third_screen.Third_screen(self,self.font)
+        self.last_screen = last_screen.Last_screen(self, self.font)
 
         self.switch_frame(self.startup_screen)
 
@@ -31,6 +32,9 @@ class App(customtkinter.CTk):
 
     def navigate_to_third_screen(self):
         self.switch_frame(self.third_screen)
+    
+    def navigate_to_last_screen(self):
+        self.switch_frame(self.last_screen)
 
 
 if __name__ == "__main__":

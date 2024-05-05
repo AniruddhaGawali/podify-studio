@@ -1,5 +1,7 @@
+import tkinter as tk
 from typing import List
 import customtkinter
+from customtkinter import CTkOptionMenu
 from style import font
 from tkinter import filedialog
 import os
@@ -17,7 +19,16 @@ class Third_screen(customtkinter.CTkFrame):
         self.label = customtkinter.CTkLabel(self, text="")
         self.label.grid(row = 1, column = 0, padx = 200, pady = 1, rowspan = 10)
 
-        # Dropdown menu for selecting audio
+        options = ["Option 1", "Option 2", "Option 3", "Option 4"]
+        self.option_var = tk.StringVar(self)
+        self.option_var.set(options[0])  # Set default value
+
+        def optionmenu_callback(choice):
+            print("Selected option:", choice)
+
+        self.combobox = customtkinter.CTkOptionMenu(self, variable=self.option_var, command=optionmenu_callback, values=options)
+        self.combobox.grid(row=1, column=2, pady=10, padx=10, columnspan=1)
+
         self.select_audio_label = customtkinter.CTkLabel(self, text="Select Audio", font=font.md)
         self.select_audio_label.grid(row=1, column=1, pady=10, padx=10,columnspan=10,sticky="nw")
 
@@ -63,5 +74,8 @@ class Third_screen(customtkinter.CTkFrame):
         self.set_background_button.grid(row=6, column=4, pady=10, padx=10)
 
         # Next button
-        self.next_button = customtkinter.CTkButton(self, text="Next", font=font.md)
+        self.next_button = customtkinter.CTkButton(self, text="Next", font=font.md , command=self.navigate_to_last_screen)
         self.next_button.grid(row=7, column=2, columnspan=3, pady=20, padx=10, sticky="s")
+
+    def navigate_to_last_screen(self):
+        self.master.navigate_to_last_screen()
