@@ -58,7 +58,7 @@ def textToAudioPyttsx3(text: str, language: str = 'en', output_file: str = 'outp
     engine.runAndWait()
 
 # Class to handle text-to-podcast conversion
-class TextToPodcast:
+class Podcast:
     def __init__(self):
         self.podcast_name = ""  # Name of the podcast
         self.script = ""  # Script for the podcast
