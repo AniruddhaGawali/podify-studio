@@ -1,14 +1,13 @@
 from typing import List
 import customtkinter
+from podcast import Podcast
 from style import font
 from tkinter import filedialog
-import os
+import tkinter as tk
 
 
 class ScriptScreen(customtkinter.CTkFrame):
-    def __init__(self,master:customtkinter.CTk,font:font.FontSize):
-
-
+    def __init__(self,master:customtkinter.CTk,font:font.FontSize,next_screen:customtkinter.CTkFrame,podcast:Podcast):
         super().__init__(master)
 
         self.instruction_list = [
@@ -18,6 +17,8 @@ class ScriptScreen(customtkinter.CTkFrame):
         self.configure(fg_color="transparent")
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(0, weight=1)
+        self.next_screen = next_screen
+
 
         self.top_frame = customtkinter.CTkFrame(self)
         self.top_frame.grid(row=0, column=0, sticky="nsew", columnspan=2 ,rowspan=2)
@@ -27,12 +28,12 @@ class ScriptScreen(customtkinter.CTkFrame):
         self.continer = customtkinter.CTkFrame(self.top_frame)
         self.continer.pack(side="left",pady=20,padx=20)
         self.continer.configure(fg_color="transparent")
-        self.title= customtkinter.CTkLabel(self.continer,text="Podify Studio | Script",font=font.xl3,bg_color="transparent")
+        self.title= customtkinter.CTkLabel(self.continer,text="Script",font=font.xl3,bg_color="transparent")
         self.title.grid(row=0,column=0,pady=20,padx=20)
 
-        self.select_scripy_button = customtkinter.CTkButton(self.continer,text="Open Scripy from Local",font=font.md,command=self.open_file)
-        self.select_scripy_button.grid(row=1,column=0,pady=20,padx=20)
-        self.select_scripy_button.configure(height=50,width=250)
+        self.select_script_button = customtkinter.CTkButton(self.continer,text="Open Script from Local",font=font.md,command=self.open_file)
+        self.select_script_button.grid(row=1,column=0,pady=20,padx=20)
+        self.select_script_button.configure(height=50,width=250)
 
         self.instruction_frame = customtkinter.CTkFrame(self.top_frame)
         self.instruction_frame.pack(side="right", pady=20, padx=20)
@@ -75,5 +76,5 @@ class ScriptScreen(customtkinter.CTkFrame):
 
     def navigate_to_third_screen(self):
         # Call the navigate_to_third_screen method of the App class
-        self.master.navigate_to_third_screen()
+        self.next_screen()
 

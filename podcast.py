@@ -3,59 +3,8 @@ from type import AudioSegmentType, DialogListType
 from typing import Dict, List
 import os
 
-# Importing libraries for text-to-speech conversion
-from pydub import AudioSegment  # For audio processing
-from gtts import gTTS  # Google Text-to-Speech API
-import pyttsx3  # For text-to-speech conversion using pyttsx3 engine
-
-# Function to convert text to speech using gTTS (Google Text-to-Speech)
-def textToAudioGtts(text: str, language: str = 'en', output_file: str = 'output.mp3', tld="com"):
-    """
-    Convert text to speech using gTTS (Google Text-to-Speech) and save it as an audio file.
-
-    Args:
-        text: 
-            The input text to convert to speech (str).
-
-        language: 
-            The language of the input text (str).
-
-        output_file: 
-            The path to save the output audio file (str).
-
-        tld:
-            Top-level domain (TLD) for the Google TTS service (str).
-
-    Returns:
-        None
-    """
-    tts = gTTS(text=text, lang=language, tld=tld)
-    tts.save(output_file)
-
-# Function to convert text to speech using pyttsx3 engine
-def textToAudioPyttsx3(text: str, language: str = 'en', output_file: str = 'output.mp3'):
-    """
-    Convert text to speech using pyttsx3 and save it as an audio file.
-
-    Args:
-        text: 
-            The input text to convert to speech (str).
-
-        language: 
-            The language of the input text (str).
-
-        output_file: 
-            The path to save the output audio file (str).
-
-    Returns:
-        None
-    """
-    engine = pyttsx3.init()
-    engine.setProperty('rate', 150)  # Speed of speech
-    engine.setProperty('volume', 0.9)  # Volume level
-    engine.setProperty('language', language)
-    engine.save_to_file(text, output_file)
-    engine.runAndWait()
+from text_to_audio import TextToAudio
+from pydub import AudioSegment
 
 # Class to handle text-to-podcast conversion
 class Podcast:
@@ -140,12 +89,12 @@ class Podcast:
         
         for i, dialog in enumerate(self._dialogs):
             name, text = dialog["name"], dialog["text"]
-            output_file = f"{self.output_folder}/dialog.mp3"
-            textToAudioGtts(text, tld=self.person_audio[name], output_file=output_file)
+            output_file = f"{self.output_folder}/dialog.wav"
+            TextToAudio.textToAudioGtts(text, tld=self.person_audio[name], output_file=output_file)
             audio = AudioSegment.from_file(output_file)
             self._dialogs_audio.append(audio)
         
-        os.remove(f"{self.output_folder}/dialog.mp3")
+        os.remove(f"{self.output_folder}/dialog.wav")
 
     # Generate the final podcast by combining all audio segments
     def generate_podcast(self):
@@ -164,12 +113,12 @@ class Podcast:
         if self.outro:
             self._podcast = self._podcast + self.outro
 
-        self._podcast.export(f"{self.output_folder}/{self.podcast_name}_output.mp3", format="mp3")
+        self._podcast.export(f"{self.output_folder}/{self.podcast_name}_output.wav", format="wav")
 
 # Example usage
-podcast = TextToPodcast()
-podcast.set_podcast_name("My Podcast")
-podcast.set_script(path="./test.txt")
-podcast.set_person_audio({"Host": "com", "Co-Host": "co.za"})
-podcast.set_output_path("./audio")
-podcast.generate_podcast()
+# podcast = Podcast()
+# podcast.set_podcast_name("My Podcast")
+# podcast.set_script(path="./test.txt")
+# podcast.set_person_audio({"Host": "com", "Co-Host": "co.za"})
+# podcast.set_output_path("./audio")
+# podcast.generate_podcast()

@@ -4,7 +4,7 @@ from style import font
 from tkinter import filedialog
 import os
 
-class Last_screen(customtkinter.CTkFrame):
+class PodcastScreen(customtkinter.CTkFrame):
     def __init__(self, master: customtkinter.CTk, font: font.FontSize):
         super().__init__(master)
 

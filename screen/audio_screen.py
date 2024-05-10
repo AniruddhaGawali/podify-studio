@@ -6,7 +6,7 @@ from style import font
 from tkinter import filedialog  
 import os
 
-class Third_screen(customtkinter.CTkFrame):
+class AudioScreen(customtkinter.CTkFrame):
     def __init__(self, master: customtkinter.CTk, font: font.FontSize):
         super().__init__(master)
 
