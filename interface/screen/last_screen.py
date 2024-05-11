@@ -24,15 +24,29 @@ class Last_screen(customtkinter.CTkFrame):
 
         # Label indicating "Your Customized Podcast"
         self.customized_label = customtkinter.CTkLabel(self, text="Your Customized Podcast", font=font.xl2)
-        self.customized_label.grid(row=10, column=4, columnspan=3, pady=20)
+        self.customized_label.grid(row=15, column=4, columnspan=3, pady=20)
+
+        # Button to play the podcast
+        self.edit_button = customtkinter.CTkButton(self, text="Play", font=font.md, command=self.play_podcast)
+        self.edit_button.grid(row=17, column=4, padx=10, pady=10)
+
+        # Button to pause the podcast
+        self.save_button = customtkinter.CTkButton(self, text="Pause", font=font.md, command=self.pause_podcast)
+        self.save_button.grid(row=17, column=5, padx=10, pady=10,columnspan = 2)
 
         # Button to edit the podcast
         self.edit_button = customtkinter.CTkButton(self, text="Edit", font=font.md, command=self.edit_podcast)
-        self.edit_button.grid(row=13, column=4, padx=10, pady=10)
+        self.edit_button.grid(row=19, column=4, padx=10, pady=10)
 
         # Button to save the podcast
         self.save_button = customtkinter.CTkButton(self, text="Save", font=font.md, command=self.save_podcast)
-        self.save_button.grid(row=13, column=5, padx=10, pady=10)
+        self.save_button.grid(row=19, column=5, padx=10, pady=10,columnspan = 2) 
+
+    def play_podcast(self):
+        pass
+
+    def pause_podcast(self):
+        pass
 
     def quit_program(self):
         # Add code to quit the program gracefully
