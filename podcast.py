@@ -58,6 +58,7 @@ class Podcast:
 
     # Extract unique person names from the script
     def get_person_from_script(self) -> List[str]:
+        self._split_in_dialogs_from_script()
         persons: List[str] = []
         for i, dialog in enumerate(self._dialogs):
             name = dialog["name"]

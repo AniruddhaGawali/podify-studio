@@ -24,5 +24,5 @@ class StartupScreeen(customtkinter.CTkFrame):
 
     def goto_script_screen(self):
         self.state.set_podcast_name(self.title_input.get())
-        print(self.state.podcast_name)
-        self.master.navigate_to_tab_screen()
+        self.master.script_screen.set_title(self.state.podcast_name+ " | Script")
+        self.master.navigate_to_script_screen()

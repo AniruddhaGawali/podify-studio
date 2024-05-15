@@ -20,15 +20,10 @@ class App(customtkinter.CTk):
         self.podcast = Podcast()
 
 
-        self.tabview = customtkinter.CTkTabview(master=self)
-        self.tabview.add("Script")
-        self.tabview.add("Audio")
-        self.tabview.add("Podcast")
-
         self.startup_screen = startup_screen.StartupScreeen(self, font=self.font,podcast=self.podcast)
-        self.script_screen = script_screen.ScriptScreen(self.tabview.tab("Script"), font=self.font,next_screen=self.navigate_to_third_screen,podcast=self.podcast)
-        self.audio_screen = audio_screen.AudioScreen(self.tabview.tab("Audio"),self.font)
-        self.podcast_screen = podcast_screen.PodcastScreen(self.tabview.tab("Podcast"), self.font)
+        self.script_screen = script_screen.ScriptScreen(self, font=self.font,next_screen=self.navigate_to_third_screen,podcast=self.podcast)
+        self.audio_screen = audio_screen.AudioScreen(self,self.font,podcast=self.podcast)
+        self.podcast_screen = podcast_screen.PodcastScreen(self, self.font)
        
         self.switch_frame(self.startup_screen)
         
@@ -36,27 +31,21 @@ class App(customtkinter.CTk):
     def switch_frame(self, frame: customtkinter.CTkFrame):
         if self.current_frame is not None:
             self.current_frame.pack_forget()
-
+        
         self.current_frame = frame
         self.current_frame.pack(expand=True, fill="both")
 
-    def navigate_to_tab_screen(self):
-        self.switch_frame(self.tabview)
-        self.script_screen.pack(expand=True, fill="both")
-        self.audio_screen.pack(expand=True, fill="both")
-        self.podcast_screen.pack(expand=True, fill="both")
-
+       
     def navigate_to_script_screen(self):
-        self.tabview.set("Script")
+        self.switch_frame(self.script_screen)
 
     def navigate_to_third_screen(self):
-        self.tabview.set("Audio")
+        self.switch_frame(self.audio_screen)
     
     def navigate_to_last_screen(self):
-        self.tabview.set("Podcast")
+        self.switch_frame(self.podcast_screen)
 
 
 if __name__ == "__main__":
     app = App()
     app.mainloop()
-

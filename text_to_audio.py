@@ -88,7 +88,7 @@ class TextToAudio:
         engine.save_to_file(text, output_file)
         engine.runAndWait()
 
-    def allVoiceInGTTS(self):
+    def allVoiceInGTTS():
         """
         Get all available voices in the gTTS API.
 
@@ -116,7 +116,7 @@ class TextToAudio:
         return voices
         
     
-    def allVoiceInPyttsx3(self):
+    def allVoiceInPyttsx3():
         """
         Get all available voices in the pyttsx3 engine.
 

@@ -18,6 +18,10 @@ class ScriptScreen(customtkinter.CTkFrame):
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(0, weight=1)
         self.next_screen = next_screen
+        self.podcast = podcast
+        self.title_var = tk.StringVar()
+        self.title_var.set("Script"+podcast.podcast_name)
+       
 
 
         self.top_frame = customtkinter.CTkFrame(self)
@@ -28,7 +32,7 @@ class ScriptScreen(customtkinter.CTkFrame):
         self.continer = customtkinter.CTkFrame(self.top_frame)
         self.continer.pack(side="left",pady=20,padx=20)
         self.continer.configure(fg_color="transparent")
-        self.title= customtkinter.CTkLabel(self.continer,text="Script",font=font.xl3,bg_color="transparent")
+        self.title= customtkinter.CTkLabel(self.continer,textvariable=self.title_var,font=font.xl3,bg_color="transparent")
         self.title.grid(row=0,column=0,pady=20,padx=20)
 
         self.select_script_button = customtkinter.CTkButton(self.continer,text="Open Script from Local",font=font.md,command=self.open_file)
@@ -50,7 +54,7 @@ class ScriptScreen(customtkinter.CTkFrame):
         self.script_text_input.grid(row=0, column=0, sticky="nsew", padx=20, pady=20)
 
         # self.next_button = customtkinter.CTkButton(self.bottom_frame, text="Next", font=font.md, command=self.bottom_frame)
-        self.next_button = customtkinter.CTkButton(self.bottom_frame, text="Next", font=font.md, command=self.navigate_to_third_screen)
+        self.next_button = customtkinter.CTkButton(self.bottom_frame, text="Next", font=font.md, command=self.go_to_next_screen)
         self.next_button.grid(row=1, column=0, padx=20, pady=20,sticky="se")
         self.next_button.configure(height=50, width=250)
         
@@ -69,12 +73,15 @@ class ScriptScreen(customtkinter.CTkFrame):
     def read_txt(self,path):
         with open(path,"r") as file:
             content = file.read()
-            print(content)
             self.script_text_input.delete("1.0", "end")
             self.script_text_input.insert("0.0",content)
 
+    def set_title(self,title):
+        self.title_var.set(title)
 
-    def navigate_to_third_screen(self):
-        # Call the navigate_to_third_screen method of the App class
-        self.next_screen()
+    def go_to_next_screen(self):
+        self.podcast.set_script(self.script_text_input.get("1.0", "end"))
+        self.master.audio_screen.set_options(self.podcast.get_person_from_script())
+        self.master.navigate_to_third_screen()
+
 
