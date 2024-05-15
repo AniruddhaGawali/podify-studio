@@ -11,7 +11,7 @@ class Podcast:
     def __init__(self):
         self.podcast_name = ""  # Name of the podcast
         self.script = ""  # Script for the podcast
-        self.output_folder = ""  # Output folder for the generated podcast
+        self.output_folder = "./audio"  # Output folder for the generated podcast
         self._podcast: AudioSegmentType = None  # Final podcast audio
 
         self.intro: AudioSegmentType = None  # Introductory audio segment

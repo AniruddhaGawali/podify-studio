@@ -1,1 +1,1 @@
-navigate_to_third_screen
+person_audio
