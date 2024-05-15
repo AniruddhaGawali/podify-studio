@@ -69,7 +69,7 @@ class AudioScreen(customtkinter.CTkFrame):
 
     def navigate_to_last_screen(self):
         self.podcast.generate_podcast()
-        # self.master.navigate_to_last_screen()
+        self.master.navigate_to_last_screen()
 
     def add_persons(self, persons: List[str]):
        values = [item['name'] for item in self.options]

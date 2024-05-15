@@ -12,7 +12,7 @@ class Podcast:
         self.podcast_name = ""  # Name of the podcast
         self.script = ""  # Script for the podcast
         self.output_folder = "./audio"  # Output folder for the generated podcast
-        self._podcast: AudioSegmentType = None  # Final podcast audio
+        self.podcast: AudioSegmentType = None  # Final podcast audio
 
         self.intro: AudioSegmentType = None  # Introductory audio segment
         self.outro: AudioSegmentType = None  # Concluding audio segment
@@ -100,21 +100,21 @@ class Podcast:
     # Generate the final podcast by combining all audio segments
     def generate_podcast(self):
         self._generate_audio_from_dialogs()
-        self._podcast = self._dialogs_audio[0]
+        self.podcast = self._dialogs_audio[0]
 
         for i in range(1, len(self._dialogs_audio)):
-            self._podcast = self._podcast + self._dialogs_audio[i]
+            self.podcast = self.podcast + self._dialogs_audio[i]
 
         if self.background_music:
-            self._podcast = self.background_music.overlay(self._podcast)
+            self.podcast = self.background_music.overlay(self.podcast)
 
         if self.intro:
-            self._podcast = self.intro + self._podcast
+            self.podcast = self.intro + self.podcast
 
         if self.outro:
-            self._podcast = self._podcast + self.outro
+            self.podcast = self.podcast + self.outro
 
-        self._podcast.export(f"{self.output_folder}/{self.podcast_name}_output.wav", format="wav")
+        self.podcast.export(f"{self.output_folder}/{self.podcast_name}_output.wav", format="wav")
 
 # Example usage
 # podcast = Podcast()

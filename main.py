@@ -23,7 +23,7 @@ class App(customtkinter.CTk):
         self.startup_screen = startup_screen.StartupScreeen(self, font=self.font,podcast=self.podcast)
         self.script_screen = script_screen.ScriptScreen(self, font=self.font,next_screen=self.navigate_to_third_screen,podcast=self.podcast)
         self.audio_screen = audio_screen.AudioScreen(self,self.font,podcast=self.podcast)
-        self.podcast_screen = podcast_screen.PodcastScreen(self, self.font)
+        self.podcast_screen = podcast_screen.PodcastScreen(self, self.font, podcast=self.podcast)
        
         self.switch_frame(self.startup_screen)
         
